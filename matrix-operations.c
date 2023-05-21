@@ -82,8 +82,9 @@ void printMatrix(const struct matrix* matr) {
 
 /*
 * Function: multByScalar multiplies a given matrix by a given scalar.
-* Variables: i, j - loop counters
+* Variables: i, j - loop counters; newMatrix - result matrix of scalar multiplication
 */
+
 struct matrix *multByScalar (float scalar, const struct matrix* matr) {
 
     struct matrix *newMatrix = createMatrix(matr -> numRows, matr -> numColumns);
@@ -141,8 +142,13 @@ struct matrix *addMatrices (const struct matrix *matrixA, const struct matrix *m
     return matrixSum;
 }
 
+
+/*
+* Variables: origMatrix - first matrix input, newMatrix - second input matrix (for adding), blankMatrix - temp matrix for operations, resultMatrix - matrix with  result of applied operation
+*/
+
 int main(){
-    struct matrix *ogMatrix, *newMatrix, *blankMatrix, *resultMatrix;
+    struct matrix *origMatrix, *newMatrix, *blankMatrix, *resultMatrix;
     int rows, columns;
     float scalar;
 
@@ -154,15 +160,15 @@ int main(){
     scanf("%d", &columns);
 
     blankMatrix = createMatrix(rows, columns);
-    ogMatrix = fillMatrix(blankMatrix, rows, columns);
+    origMatrix = fillMatrix(blankMatrix, rows, columns);
     printf("\n");
     printf("Original matrix: \n");
-    printMatrix(ogMatrix);
+    printMatrix(origMatrix);
     
     // 2 - Multiplying a matrix by a scalar
     printf("Enter the scalar you want to multiply the matrix by: ");
     scanf("%f", &scalar);
-    resultMatrix = multByScalar(scalar, ogMatrix);
+    resultMatrix = multByScalar(scalar, origMatrix);
 
     printf("\n");
     printf("Scaled matrix: \n");
@@ -176,7 +182,7 @@ int main(){
     blankMatrix = createMatrix(rows, columns);
     newMatrix = fillMatrix(blankMatrix, rows, columns);
 
-    resultMatrix = addMatrices(ogMatrix, newMatrix);
+    resultMatrix = addMatrices(origMatrix, newMatrix);
     printf("Matrix sum: \n");
     printMatrix(resultMatrix);
 
@@ -188,7 +194,7 @@ int main(){
     blankMatrix = createMatrix(rows, columns);
     newMatrix = fillMatrix(blankMatrix, rows, columns);
 
-    resultMatrix = multMatrices(ogMatrix, newMatrix);
+    resultMatrix = multMatrices(origMatrix, newMatrix);
     printf("Matrix product: \n");
     printMatrix(resultMatrix);
 
